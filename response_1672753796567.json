@@ -1,0 +1,215 @@
+{
+  "repaymentEvery": 1,
+  "loanProductDescription": "Business loan",
+  "proposedPrincipal": 1638.66,
+  "interestRatePerPeriod": 0,
+  "officeName": "Gweru Recoveries",
+  "expectedFirstRepaymentOnDate": [
+    2013,
+    7,
+    1
+  ],
+  "loanOfficerId": 30,
+  "allowPartialPeriodInterestCalcualtion": false,
+  "canDefineInstallmentAmount": false,
+  "termFrequency": 3,
+  "repayPrincipalEvery": 1,
+  "stopApplyingPenalty": false,
+  "clientOfficeId": 6,
+  "clientAccountNo": "0006-0030-11866",
+  "officeId": 6,
+  "paidInAdvance": {
+    "paidInAdvance": 0
+  },
+  "id": 3094,
+  "isFloatingInterestRate": false,
+  "loanProductId": 28,
+  "inArrears": false,
+  "originChannel": "NONE",
+  "numberOfRepayments": 3,
+  "loanOfficerName": "LO, Recoveriesgweru",
+  "isNPA": false,
+  "annualInterestRate": 0,
+  "transactionProcessingStrategyId": 1,
+  "repaymentFrequencyType": {
+    "code": "repaymentFrequency.periodFrequencyType.months",
+    "id": 2,
+    "value": "Months"
+  },
+  "loanProductName": "Working Capital Loan",
+  "loanCounter": 1,
+  "loanProductCounter": 1,
+  "repayInterestEvery": 1,
+  "status": {
+    "code": "loanStatusType.closed.obligations.met",
+    "closedObligationsMet": true,
+    "closedRescheduled": false,
+    "overpaid": false,
+    "waitingForDisbursal": false,
+    "active": false,
+    "closedWrittenOff": false,
+    "closed": true,
+    "restructured": false,
+    "id": 600,
+    "value": "Closed (obligations met)",
+    "pendingApproval": false
+  },
+  "minimumGap": 0,
+  "loanType": {
+    "code": "accountType.individual",
+    "id": 1,
+    "value": "Individual"
+  },
+  "termPeriodFrequencyType": {
+    "code": "termFrequency.periodFrequencyType.months",
+    "id": 2,
+    "value": "Months"
+  },
+  "maximumGap": 0,
+  "clientName": "Compuref Group .",
+  "internalRateOfReturn": 0,
+  "interestType": {
+    "code": "interestType.flat",
+    "id": 1,
+    "value": "Flat"
+  },
+  "isInterestRecalculationEnabled": false,
+  "approvedPrincipal": 1638.66,
+  "transactionProcessingStrategyName": "Penalties, Fees, Interest, Principal order",
+  "principal": 1638.66,
+  "syncDisbursementWithMeeting": false,
+  "isLoanProductLinkedToFloatingRate": false,
+  "accountNo": "000003094",
+  "isTopup": false,
+  "currency": {
+    "displaySymbol": "$",
+    "displayLabel": "US Dollar ($)",
+    "code": "USD",
+    "decimalPlaces": 2,
+    "nameCode": "currency.USD",
+    "inMultiplesOf": 1,
+    "name": "US Dollar"
+  },
+  "isInDuplum": false,
+  "amortizationType": {
+    "code": "amortizationType.equal.principal",
+    "id": 0,
+    "value": "Equal principal payments"
+  },
+  "feeChargesAtDisbursementCharged": 0,
+  "summary": {
+    "totalExpectedRepayment": 1638.66,
+    "totalOutstanding": 0,
+    "feeChargesWaived": 0,
+    "feeChargesPaid": 0,
+    "interestWaived": 0,
+    "totalRecovered": 0,
+    "penaltyChargesPaid": 0,
+    "feeChargesOutstanding": 0,
+    "penaltyChargesOverdue": 0,
+    "interestOverdue": 0,
+    "interestWrittenOff": 0,
+    "principalOverdue": 0,
+    "penaltyChargesWaived": 0,
+    "feeChargesDueAtDisbursementCharged": 0,
+    "totalWaived": 0,
+    "totalCostOfLoan": 0,
+    "currency": {
+      "displaySymbol": "$",
+      "displayLabel": "US Dollar ($)",
+      "code": "USD",
+      "decimalPlaces": 2,
+      "nameCode": "currency.USD",
+      "inMultiplesOf": 1,
+      "name": "US Dollar"
+    },
+    "interestOutstanding": 0,
+    "totalExpectedCostOfLoan": 0,
+    "feeChargesOverdue": 0,
+    "interestPaid": 0,
+    "totalRepayment": 1638.66,
+    "feeChargesCharged": 0,
+    "principalOutstanding": 0,
+    "penaltyChargesOutstanding": 0,
+    "feeChargesWrittenOff": 0,
+    "principalPaid": 1638.66,
+    "totalWrittenOff": 0,
+    "totalOverdue": 0,
+    "principalWrittenOff": 0,
+    "penaltyChargesCharged": 0,
+    "penaltyChargesWrittenOff": 0,
+    "principalDisbursed": 1638.66,
+    "interestCharged": 0
+  },
+  "interestRateFrequencyType": {
+    "code": "interestRateFrequency.periodFrequencyType.months",
+    "id": 2,
+    "value": "Per month"
+  },
+  "clientId": 11866,
+  "closureLoanId": 0,
+  "daysInMonthType": {
+    "code": "DaysInMonthType.days360",
+    "id": 30,
+    "value": "30 Days"
+  },
+  "externalId": "70120400465R",
+  "isVariableInstallmentsAllowed": false,
+  "overdueCharges": [],
+  "canUseForTopup": true,
+  "daysInYearType": {
+    "code": "DaysInYearType.days360",
+    "id": 360,
+    "value": "360 Days"
+  },
+  "multiDisburseLoan": false,
+  "canDisburse": false,
+  "createStandingInstructionAtDisbursement": false,
+  "timeline": {
+    "submittedByLastname": "Administrator",
+    "approvedByUsername": "musoni",
+    "submittedByFirstname": "App",
+    "expectedDisbursementDate": [
+      2013,
+      6,
+      1
+    ],
+    "submittedByUsername": "musoni",
+    "approvedByLastname": "Administrator",
+    "disbursedByUsername": "musoni",
+    "actualDisbursementDate": [
+      2013,
+      6,
+      1
+    ],
+    "expectedMaturityDate": [
+      2013,
+      9,
+      2
+    ],
+    "disbursedByLastname": "Administrator",
+    "approvedOnDate": [
+      2013,
+      6,
+      1
+    ],
+    "approvedByFirstname": "App",
+    "submittedOnDate": [
+      2013,
+      6,
+      1
+    ],
+    "disbursedByFirstname": "App",
+    "closedOnDate": [
+      2020,
+      9,
+      16
+    ]
+  },
+  "interestCalculationPeriodType": {
+    "code": "interestCalculationPeriodType.same.as.repayment.period",
+    "id": 1,
+    "value": "Same as repayment period"
+  },
+  "effectiveInterestRate": 0
+}
