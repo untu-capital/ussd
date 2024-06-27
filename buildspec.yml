@@ -10,11 +10,13 @@ phases:
   build:
     commands:
       - mvn clean package -DskipTests
+      - ls -alR
   post_build:
     commands:
       - echo Build completed on `date`
+
 artifacts:
   files:
-    - target/ussd.jar
+    - '**/target/ussd.jar'
   discard-paths: yes
-  base-directory: target
+  base-directory: .
