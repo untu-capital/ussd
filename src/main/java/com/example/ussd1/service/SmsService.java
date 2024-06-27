@@ -1,13 +1,12 @@
 package com.example.ussd1.service;
 
-import com.example.ussd1.DTO.SMSDto;
+import com.example.ussd1.dto.SMSDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -88,9 +87,9 @@ public class SmsService {
         return restTemplate.exchange(eSolutionsBaseURL + "balance/UNTUAPI", HttpMethod.GET, entity, String.class).getBody();
     }
 
-    @Scheduled(fixedRate = 5000)
-    public String SchedulerConfig() {
-        System.out.println("The time is now {}");
-        return "The time is now {}";
-    }
+//    @Scheduled(fixedRate = 5000)
+//    public String SchedulerConfig() {
+//        System.out.println("The time is now {}");
+//        return "The time is now {}";
+//    }
 }

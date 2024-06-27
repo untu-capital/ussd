@@ -2,6 +2,7 @@ package com.example.ussd1.service;
 
 //import com.example.ussd1.exception.RestTemplateResponseErrorHandler;
 import com.example.ussd1.entity.Industry;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -171,27 +172,37 @@ public class MusoniService {
     }
 
     List<String> clientAccounts = new ArrayList<>();
-    public List<String> getClientLoans(String loanAccount) {
-        String clientAccount = restTemplate.exchange(musoniBaseURl + "clients/" + loanAccount + "/accounts", HttpMethod.GET, setHttpEntity(), String.class).getBody();
 
-        for (int i = 0; i<new JSONObject(clientAccount).getJSONArray("loanAccounts").length(); i++) {
-            String clientAccountsList = new JSONObject(new JSONObject(clientAccount).getJSONArray("loanAccounts").get(i).toString()).getBigInteger("accountNo").toString();
-            clientAccounts.add(clientAccountsList);
+    public List<String> getClientLoans(String loanAccount) {
+        clientAccounts.clear();
+        String clientAccount = restTemplate.exchange(
+                "http://localhost:7878/api/utg/musoni/getActiveClientLoans/" + loanAccount,
+                HttpMethod.GET,
+                setHttpEntity(),
+                String.class
+        ).getBody();
+
+        JSONArray loanArray = new JSONArray(clientAccount);
+        for (int i = 0; i < loanArray.length(); i++) {
+            String loanId = loanArray.getJSONObject(i).getBigInteger("loanId").toString();
+            clientAccounts.add(loanId);
         }
 
         return clientAccounts;
     }
 
 
-    public String getClientAccountsList(){
-        StringBuilder menu = new StringBuilder("");
+
+    public String getClientAccountsList() {
+        StringBuilder menu = new StringBuilder();
         int num = 1;
         for (String x : clientAccounts) {
-            menu.append("\n").append(num).append(". ").append(x);
+            menu.append("\n").append(num).append(". ").append(x); // 1. 310056
             num++;
         }
         return menu.toString();
     }
+
 
 
     public String currencyFormatter(BigDecimal amount) {

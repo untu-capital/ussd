@@ -1,4 +1,4 @@
-package com.example.ussd1.DTO;
+package com.example.ussd1.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

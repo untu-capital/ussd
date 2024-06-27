@@ -1,12 +1,10 @@
 package com.example.ussd1.service;
 
-import com.example.ussd1.DTO.MiniStatementDTO;
-import com.example.ussd1.DTO.RepaymentScheduleDTO;
+import com.example.ussd1.dto.MiniStatementDTO;
+import com.example.ussd1.dto.RepaymentScheduleDTO;
 import com.example.ussd1.entity.CollateralSecurity;
-import com.example.ussd1.entity.LoanApplication;
 import com.example.ussd1.repository.CollateralSecurityRepository;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 

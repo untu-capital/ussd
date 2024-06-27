@@ -35,12 +35,13 @@ public class NonExistingClientsService {
         System.out.println(text);
         StringBuilder menu = new StringBuilder();
 
-        if(text.isEmpty()){
-            menu.append("CON Welcome to Untu. Please select an option. \n1. Get Help. \n2. Cancel");
+        //TODO fix the # problem
+        if(text.isEmpty() || text.equals("#")){
+            menu.append("Good day,\n\nFor now, this service is only available for repeat clients. Please visit our nearest branch or our website (www.untucapital.co.zw) for further assistance.");
         }
 //                Apply for loan
         else if (levels.length == 1 && Objects.equals(levels[0], "1")) {
-            menu.append("CON Contact any of our branches. ").append(branches);
+            menu.append("Contact any of our branches. ").append(branches);
         }
         //                show branch details
         else if (levels.length==2 && Objects.equals(levels[0],"1")&& !Objects.equals(levels[1],"")) {
@@ -50,7 +51,7 @@ public class NonExistingClientsService {
         }
 
         else {
-            menu.append("CON Invalid Option.. Try Again");
+            menu.append("Invalid Option.. Try Again");
         }
         return menu;
     }

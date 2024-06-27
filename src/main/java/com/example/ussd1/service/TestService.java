@@ -29,35 +29,35 @@ public class TestService {
 //            System.out.println("Array Length =>"+Integer.parseInt(levels[levels.length-1]));
 //
 //            if(levels.length == 1){
-//                menu.append("CON What would you like to do ?\n1.APPLY FOR A LOAN.\n2.ENQUIRIES\n3.CONTACT INFO");
+//                menu.append("What would you like to do ?\n1.APPLY FOR A LOAN.\n2.ENQUIRIES\n3.CONTACT INFO");
 //            }
 ////                Apply for loan
 //            else if (levels.length == 2 && Objects.equals(levels[1], "1")) {
-//                menu.append("CON First time applying ?\n1.Yes (New).\n2.No (Repeat)");
+//                menu.append("First time applying ?\n1.Yes (New).\n2.No (Repeat)");
 //            }
 ////                ***Start Apply For New Loan***
 //            else if (levels.length == 3 && Objects.equals(levels[1], "1") && Objects.equals(levels[2],"1")) {
-//                menu.append("CON Enter Loan Amount");
+//                menu.append("Enter Loan Amount");
 //            }
 ////                ***End Apply For New Loan***
 //
 ////                Start Apply For Repeat Loan
 //            else if (levels.length==3 && Objects.equals(levels[1], "1") && Objects.equals(levels[2],"2")) {
-//                menu.append("CON Enter Loan Amount (Repeat)");
+//                menu.append("Enter Loan Amount (Repeat)");
 //            }
 ////                Start Apply For Repeat Loan
 //
 //            else if (levels.length == 4 && Objects.equals(levels[1], "1") && !Objects.equals(levels[3],"")) {
 //                System.out.println("Selected loan amount "+levels[3]);
-//                menu.append("CON Repayment Period (Tenure)");
+//                menu.append("Repayment Period (Tenure)");
 //            }else if (levels.length == 5 && Objects.equals(levels[1], "1") && !Objects.equals(levels[3],"") && !Objects.equals(levels[4],"")) {
-//                menu.append("CON Select Nearest Branch.").append(industries);
+//                menu.append("Select Nearest Branch.").append(industries);
 //            } else if (levels.length == 6 && Objects.equals(levels[1], "1") && !Objects.equals(levels[3],"")&& !Objects.equals(levels[4],"")&& !Objects.equals(levels[5],"")) {
-//                menu.append("CON Select Nearest Branch.").append(branches);
+//                menu.append("Select Nearest Branch.").append(branches);
 //            }else if (levels.length == 7 && Objects.equals(levels[1],"1") && !Objects.equals(levels[3],"")&& !Objects.equals(levels[4],"")&& !Objects.equals(levels[5],"")&& !Objects.equals(levels[6],"")) {
 //                String branch = contactInfo.getBranchName(levels[6]);
 //                String industry = industryService.findIndustryById(levels[5]);
-//                menu.append("CON Confirm Loan Details:\nLoan Amount :$").append(levels[3]).append("\nTenure:").append(levels[4]).append("\nIndustry Sector: ").append(industry).append("\nNearest Branch: ").append(branch).append("\n1.Confirm\n2.Cancel");
+//                menu.append("Confirm Loan Details:\nLoan Amount :$").append(levels[3]).append("\nTenure:").append(levels[4]).append("\nIndustry Sector: ").append(industry).append("\nNearest Branch: ").append(branch).append("\n1.Confirm\n2.Cancel");
 //            }else if (levels.length == 8 && Objects.equals(levels[1],"1") && !Objects.equals(levels[3],"")&& !Objects.equals(levels[4],"")&& !Objects.equals(levels[5],"")&& !Objects.equals(levels[6],"")&& Objects.equals(levels[7],"1")) {
 //                //Save New Loan Application
 //                applyForLoanService.saveLoanApplication(levels,phoneNumber);
@@ -69,11 +69,11 @@ public class TestService {
 //
 ////                ***Start Enquiries***
 //            else if (levels.length==2 && Objects.equals(levels[1],"2")) {
-//                menu.append("CON \n1.Loan Balance Enquiry\n2.Repayment Schedule\n3.Collateral Security Request\n4.Change Pin.\n5.Check Loan Accounts");
+//                menu.append("\n1.Loan Balance Enquiry\n2.Repayment Schedule\n3.Collateral Security Request\n4.Change Pin.\n5.Check Loan Accounts");
 //            }
 ////                Enter loan account for checking balance
 //            else if ((levels.length== 3 && Objects.equals(levels[1],"2") && Objects.equals(levels[2],"1"))) {
-//                menu.append("CON Enter Loan Account No.");
+//                menu.append("Enter Loan Account No.");
 //            }
 ////                Query Mini Statement
 //            else if ((levels.length== 4 && Objects.equals(levels[1],"2")&& Objects.equals(levels[2],"1")&& !Objects.equals(levels[3],""))) {
@@ -82,7 +82,7 @@ public class TestService {
 //            }
 ////                 Enter loan account for repayment schedule
 //            else if ((levels.length== 3 && Objects.equals(levels[1],"2") && Objects.equals(levels[2],"2"))) {
-//                menu.append("CON Enter Loan Account No.");
+//                menu.append("Enter Loan Account No.");
 //            }
 ////                Show repayments schedule
 //            else if ((levels.length== 4 && Objects.equals(levels[1],"2")&& Objects.equals(levels[2],"2")&& !Objects.equals(levels[3],""))) {
@@ -91,7 +91,7 @@ public class TestService {
 //            }
 ////                 Enter loan account for collateral security check
 //            else if ((levels.length== 3 && Objects.equals(levels[1],"2") && Objects.equals(levels[2],"3"))) {
-//                menu.append("CON Enter Loan Account No.");
+//                menu.append("Enter Loan Account No.");
 //            }
 ////                show collateral security
 //            else if ((levels.length== 4 && Objects.equals(levels[1],"2")&& Objects.equals(levels[2],"3")&& !Objects.equals(levels[3],""))) {
@@ -100,15 +100,15 @@ public class TestService {
 //            }
 ////                Enter Old Pin
 //            else if ((levels.length== 3 && Objects.equals(levels[1],"2") && Objects.equals(levels[2],"4"))) {
-//                menu.append("CON Please Enter Old Pin.");
+//                menu.append("Please Enter Old Pin.");
 //            }
 ////                Enter New Pin
 //            else if ((levels.length== 4 && Objects.equals(levels[1],"2")&& Objects.equals(levels[2],"4")&& !Objects.equals(levels[3],""))) {
-//                menu.append("CON Enter-New 4 Digit Pin");
+//                menu.append("Enter-New 4 Digit Pin");
 //            }
 ////                        Re Enter New Pin
 //            else if ((levels.length== 5 && Objects.equals(levels[1],"2")&& Objects.equals(levels[2],"4")&& !Objects.equals(levels[3],"")&& !Objects.equals(levels[4],""))) {
-//                menu.append("CON Re-Enter New 4 Digit Pin");
+//                menu.append("Re-Enter New 4 Digit Pin");
 //            }
 ////                Pin Change Confirmation
 //            else if ((levels.length== 6 && Objects.equals(levels[1],"2") && Objects.equals(levels[2],"4")&& !Objects.equals(levels[3],"")&& !Objects.equals(levels[4],"") && !Objects.equals(levels[5],""))) {
@@ -117,14 +117,14 @@ public class TestService {
 ////              Show All Loan Accounts
 //            else if ((levels.length== 3 && Objects.equals(levels[1],"2") && Objects.equals(levels[2],"5"))) {
 //                String loanAccounts = enquiriesService.showAllLoanAccounts(phoneNumber);
-//                menu.append("CON Loan Accounts:\n").append(loanAccounts);
+//                menu.append("Loan Accounts:\n").append(loanAccounts);
 //            }
 ////                ***End Enquiries***
 //
 ////                ***start contact info***
 //            else if (levels.length==2 && Objects.equals(levels[1],"3")) {
 //                //Get Branch Menu
-//                menu.append("CON Select Branch").append(branches);
+//                menu.append("Select Branch").append(branches);
 //            }
 ////                show branch details
 //            else if (levels.length==3 && Objects.equals(levels[1],"3")&& !Objects.equals(levels[2],"")) {
@@ -132,7 +132,7 @@ public class TestService {
 //                menu.append("END Branch Details").append(branchDetails);
 //            }
 //            else {
-//                menu.append("CON Invalid Option Try Again");
+//                menu.append("Invalid Option Try Again");
 //            }
 ////                ***start contact info***
 //        return menu;
