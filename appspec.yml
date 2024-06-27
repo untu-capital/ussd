@@ -1,10 +1,10 @@
 version: 0.0
-os: linux
+os: windows
 files:
   - source: target/ussd.jar
-    destination: /home/ec2-user/
+    destination: C:\deployments\ussd\
 hooks:
   AfterInstall:
-    - location: scripts/deploy.sh
+    - location: scripts\deploy.ps1
       timeout: 300
-      runas: ec2-user
+      runas: Administrator
