@@ -120,6 +120,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>ussd</finalName>
     </build>
 
 </project>
