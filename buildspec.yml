@@ -1,14 +1,20 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  pre_build:
+    commands:
+      - echo Build started on `date`
   build:
     commands:
-      - echo Entered the build phase...
-      - mvn clean package
+      - mvn clean package -DskipTests
   post_build:
     commands:
-      - echo Build completed successfully
+      - echo Build completed on `date`
 artifacts:
   files:
     - target/ussd.jar
   discard-paths: yes
+  base-directory: target
