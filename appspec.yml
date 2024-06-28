@@ -4,6 +4,10 @@ files:
   - source: target/ussd.jar
     destination: C:\deployments\ussd\
 hooks:
+  BeforeInstall:
+    - location: scripts\before_install.ps1
+      timeout: 300
+      runas: Administrator
   AfterInstall:
     - location: scripts\deploy.ps1
       timeout: 300
