@@ -1,10 +1,7 @@
-# ApplicationStart.ps1
+# Assuming your Java application is a JAR file located in C:\YourAppDirectory
+$javaHome = "C:\jdk-17"
+$env:JAVA_HOME = $javaHome
+$env:PATH = "$javaHome\bin;$env:PATH"
 
-# Ensure the directory exists
-$deployDir = "C:\deployments\ussd"
-if (-Not (Test-Path $deployDir)) {
-    New-Item -Path $deployDir -ItemType Directory
-}
 
-# Start the Java application using Java 17
-Start-Process -FilePath "$env:JAVA_HOME\bin\java.exe" -ArgumentList "-jar", "C:\deployments\ussd\ussd.jar" -NoNewWindow -PassThru
+Start-Process -FilePath "$env:JAVA_HOME\bin\java.exe" -ArgumentList "-jar", "C:\deployments\ussd\ussd.jar"
