@@ -1,31 +1,17 @@
+# ValidateService.ps1
+
 Write-Output "Running ValidateService script"
 
-# Replace this with your JAR file name
-$jarFileName = "ussd.jar"
+# Replace this with your JAR file name (without extension)
+$jarFilePath = "C:\deployments\ussd\ussd.jar"
 
-# Get the list of Java processes
-$javaProcesses = Get-Process -Name java -ErrorAction SilentlyContinue
+# Get the process running the JAR file
+$javaProcess = Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like "*$jarFilePath*" }
 
-if ($null -eq $javaProcesses) {
-    Write-Output "No Java processes are running."
+if ($javaProcess) {
+    Write-Output "Java process running $jarFilePath found."
+    exit 0
+} else {
+    Write-Output "Java process running $jarFilePath is not found."
     exit 1
 }
-
-# Check if any Java process is running your JAR file
-$processFound = $false
-foreach ($process in $javaProcesses) {
-    $commandLine = (Get-CimInstance Win32_Process -Filter "ProcessId = $($process.Id)").CommandLine
-    if ($commandLine -match $jarFileName) {
-        Write-Output "Java process running $jarFileName is found."
-        $processFound = $true
-        break
-    }
-}
-
-if (-not $processFound) {
-    Write-Output "Java process running $jarFileName is not found."
-    exit 1
-}
-
-Write-Output "Java process running $jarFileName is running."
-exit 0
