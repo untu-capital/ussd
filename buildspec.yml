@@ -11,9 +11,14 @@ phases:
     commands:
       - mvn clean package -DskipTests
       - ls -alR
-      - mkdir -p scripts
-      - cp scripts/* target/
-      - cp appspec.yml target/
   post_build:
     commands:
-      - echo Build completed on ` files
+      - echo Build completed on `date`
+
+artifacts:
+  files:
+    - '**/target/ussd.jar'
+    - 'appspec.yml'
+    - 'scripts/**'
+  discard-paths: yes
+  base-directory: .
