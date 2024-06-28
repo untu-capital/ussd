@@ -1,14 +1,22 @@
 # ValidateService.ps1
-Write-Host "Running ValidateService script"
 
-# Example: Validate the Java application service
+Write-Output "Running ValidateService script"
+
 $serviceName = "ussd"
-$service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
 
-if ($service -and $service.Status -eq 'Running') {
-    Write-Host "Service $serviceName is running."
-    # Add any additional validation logic here, such as checking logs or endpoints
-} else {
-    Write-Host "Service $serviceName is not running or does not exist."
-    Exit 1
+# Check if the service exists
+if (-not (Get-Service -Name $serviceName -ErrorAction SilentlyContinue)) {
+    Write-Output "Service $serviceName does not exist or cannot be found."
+    exit 1
 }
+
+# Check if the service is running
+$status = (Get-Service -Name $serviceName).Status
+if ($status -ne "Running") {
+    Write-Output "Service $serviceName is not running (Current status: $status)."
+    exit 1
+}
+
+Write-Output "Service $serviceName is running."
+exit 0
+
