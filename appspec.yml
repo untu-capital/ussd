@@ -6,21 +6,21 @@ files:
 
 hooks:
   BeforeInstall:
-    - location: scripts/BeforeInstall.ps1
+    - location: BeforeInstall.ps1
       timeout: 300
       runas: Administrator
   AfterInstall:
-    - location: scripts/AfterInstall.ps1
+    - location: AfterInstall.ps1
       timeout: 300
       runas: Administrator
   ApplicationStart:
-    - location: scripts/ConfigureJava.ps1
+    - location: ConfigureJava.ps1
       timeout: 300
       runas: Administrator
-    - location: scripts/ApplicationStart.ps1
+    - location: ApplicationStart.ps1
       timeout: 300
       runas: Administrator
   ValidateService:
-    - location: scripts/ValidateService.ps1
+    - location: ValidateService.ps1
       timeout: 300
       runas: Administrator
