@@ -18,5 +18,7 @@ phases:
 artifacts:
   files:
     - '**/target/ussd.jar'
+    - 'appspec.yml'
+    - 'scripts/**'
   discard-paths: yes
   base-directory: .
