@@ -1,7 +1,6 @@
-# BeforeInstall.ps1
+
 Write-Host "Running BeforeInstall script"
 
-# Example: Stop the Java application service if it is running
 $serviceName = "ussd"
 $service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
 

@@ -1,7 +1,10 @@
 package com.example.ussd1.service;
 
+import com.example.ussd1.client.UtgClient;
 import com.example.ussd1.commons.UssdConstants;
+import com.example.ussd1.dto.Loan;
 import com.example.ussd1.dto.ResponseMenu;
+import com.example.ussd1.dto.req.LoanRequest;
 import com.example.ussd1.dto.res.MessageResponse;
 import com.example.ussd1.entity.LoanApplication;
 import com.example.ussd1.entity.UserEntity;
@@ -11,8 +14,10 @@ import com.example.ussd1.util.StringUtil;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,24 +31,26 @@ import kong.unirest.Unirest;
 import org.json.JSONObject;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class ApplyForLoanService {
-    @Autowired
+
     private final LoanApplicationRepository loanApplicationRepository;
-    @Autowired
+
     private final ContactInfo contactInfo;
-    @Autowired
+
     private final IndustryService industryService;
-    @Autowired
+
     private final EnquiriesService enquiriesService;
-    @Autowired
+
     private final MusoniService musoniService;
-    @Autowired
+
     private final UserRepository userRepository;
 
     private final UserService userService;
     private final SmsService smsService;
+
+    private final UtgClient utgClient;
 
     // Create a logger instance
     private static final Logger logger = Logger.getLogger(ApplyForLoanService.class.getName());
@@ -111,7 +118,7 @@ public class ApplyForLoanService {
         }
         else if (levels.length == 4 && Objects.equals(levels[0], "1") && !Objects.equals(levels[1],"")&& !Objects.equals(levels[2],"")&& !Objects.equals(levels[3],"")) {            //Save New Loan Application
             saveLoanApplication(levels[1], levels[2], phoneNumber);
-            menu.append("Thank you for submitting your loan application to us. We have successfully received it and are currently processing your request. We will keep you updated on the status of your application. Please feel free to contact us if you have any questions or concerns.");
+            menu.append("Thank you, we have received your loan application.");
             responseMenu.setMessage(menu);
             responseMenu.setStage(UssdConstants.STAGE_MENU_COMPLETE);
             responseMenu.setTransactionType(UssdConstants.TRANSACTION_TYPE_APPLY_LOAN);
@@ -127,8 +134,23 @@ public class ApplyForLoanService {
 
 
         else if (levels.length == 1 && Objects.equals(levels[0], "2")) {
-            List<String> loanStatement = musoniService.getClientLoans(user.get().getMusoniClientId());
+            List<String> loanStatement =new ArrayList<>();
+            try {
+               loanStatement = musoniService.getClientLoans(user.get().getMusoniClientId());
+            }catch (Exception e) {
 
+                int jsonStartIndex = e.getMessage().indexOf('{');
+                if (jsonStartIndex != -1) {
+                    String jsonString = e.getMessage().substring(jsonStartIndex);
+                    JSONObject jsonObject = new JSONObject(jsonString);
+
+                    responseMenu.setMessage(new StringBuilder(jsonObject.optString("message")));
+                    responseMenu.setStage(UssdConstants.STAGE_MENU_COMPLETE);
+                    responseMenu.setTransactionType(UssdConstants.TRANSACTION_TYPE_NEXT_INSTALMENT_ENQUIRY);
+
+                    return responseMenu;
+                }
+            }
             log.info("loans list: {}", loanStatement);
 
             menu.append("Select Loan Account \n").append(musoniService.getClientAccountsList());
@@ -280,13 +302,24 @@ public class ApplyForLoanService {
     }
     public void saveLoanApplication(String amount, String tenure, String phoneNumber){
         LoanApplication loanApplication = new LoanApplication();
+        LoanRequest newLoanApplication = new LoanRequest();
+        Loan clientLoan = utgClient.getLoanApplication(phoneNumber);
 
-        loanApplication.setAmount(Long.valueOf(amount));
-        loanApplication.setTenure(Integer.parseInt(tenure));
-        loanApplication.setPhoneNumber(phoneNumber);
+        BeanUtils.copyProperties(clientLoan,newLoanApplication);
 
-        System.out.println(loanApplication);
-        loanApplicationRepository.save(loanApplication);
+        newLoanApplication.setLoanAmount(amount);
+        newLoanApplication.setTenure(tenure);
+        newLoanApplication.setPhoneNumber(phoneNumber);
+
+
+        log.info("Loan Application: {}", clientLoan);
+       // loanApplicationRepository.save(loanApplication);
+        try {
+
+            utgClient.saveLoanApplication(newLoanApplication);
+        }catch (Exception e){
+            log.info("Failed to save loan application: {}",e.getMessage());
+        }
     }
 
     public List<LoanApplication> getAllAppliedLoans(){
