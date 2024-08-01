@@ -20,7 +20,7 @@ hooks:
     - location: ApplicationStart.ps1
       timeout: 300
       runas: Administrator
-  ValidateService:
-    - location: ValidateService.ps1
-      timeout: 300
-      runas: Administrator
+#  ValidateService:
+#    - location: ValidateService.ps1
+#      timeout: 300
+#      runas: Administrator
