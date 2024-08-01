@@ -1,6 +1,5 @@
 package com.example.ussd1.service;
 
-import com.example.ussd1.client.UtgClient;
 import com.example.ussd1.commons.UssdConstants;
 import com.example.ussd1.dto.Loan;
 import com.example.ussd1.dto.ResponseMenu;
@@ -50,7 +49,7 @@ public class ApplyForLoanService {
     private final UserService userService;
     private final SmsService smsService;
 
-    private final UtgClient utgClient;
+//    private final UtgClient utgClient;
 
     // Create a logger instance
     private static final Logger logger = Logger.getLogger(ApplyForLoanService.class.getName());
@@ -300,26 +299,27 @@ public class ApplyForLoanService {
 //                ***start contact info***
         return responseMenu;
     }
+
     public void saveLoanApplication(String amount, String tenure, String phoneNumber){
         LoanApplication loanApplication = new LoanApplication();
         LoanRequest newLoanApplication = new LoanRequest();
-        Loan clientLoan = utgClient.getLoanApplication(phoneNumber);
+//        Loan clientLoan = utgClient.getLoanApplication(phoneNumber);
 
-        BeanUtils.copyProperties(clientLoan,newLoanApplication);
+//        BeanUtils.copyProperties(clientLoan,newLoanApplication);
 
         newLoanApplication.setLoanAmount(amount);
         newLoanApplication.setTenure(tenure);
         newLoanApplication.setPhoneNumber(phoneNumber);
 
 
-        log.info("Loan Application: {}", clientLoan);
-       // loanApplicationRepository.save(loanApplication);
-        try {
-
-            utgClient.saveLoanApplication(newLoanApplication);
-        }catch (Exception e){
-            log.info("Failed to save loan application: {}",e.getMessage());
-        }
+//        log.info("Loan Application: {}", clientLoan);
+        loanApplicationRepository.save(loanApplication);
+//        try {
+//
+//            utgClient.saveLoanApplication(newLoanApplication);
+//        }catch (Exception e){
+//            log.info("Failed to save loan application: {}",e.getMessage());
+//        }
     }
 
     public List<LoanApplication> getAllAppliedLoans(){
