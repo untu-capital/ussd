@@ -1,3 +1,5 @@
+Write-Host "Running BeforeInstall script"
+
 # Path to the old JAR file
 $jarFilePath = "C:\deployments\ussd\ussd.jar"
 
@@ -15,3 +17,5 @@ if (Test-Path $jarFilePath) {
     Write-Host "Removing old JAR file: $jarFilePath"
     Remove-Item -Path $jarFilePath -Force
 }
+
+Write-Host "BeforeInstall script completed."
