@@ -5,14 +5,20 @@ $maxRetries = 5
 $delay = 10
 $found = $false
 
-for ($i = 1; $i -le ${maxRetries}; $i++) {
+for ($i = 1; $i -le $maxRetries; $i++) {
     Write-Output "Attempt ${i}: Checking for Java process running ${jarFilePath}..."
 
-    $javaProcess = Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like "*${jarFilePath}*" }
+    $javaProcesses = Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like "*java*" }
 
-    if ($javaProcess) {
-        Write-Output "Java process running ${jarFilePath} found."
-        $found = $true
+    foreach ($process in $javaProcesses) {
+        if ($process.CommandLine -like "*-jar ${jarFilePath}*") {
+            Write-Output "Java process running ${jarFilePath} found."
+            $found = $true
+            break
+        }
+    }
+
+    if ($found) {
         break
     } else {
         Write-Output "Java process running ${jarFilePath} is not found. Retrying in ${delay} seconds..."
@@ -20,7 +26,7 @@ for ($i = 1; $i -le ${maxRetries}; $i++) {
     }
 }
 
-if (-not ${found}) {
+if (-not $found) {
     Write-Output "Java process running ${jarFilePath} is not found after ${maxRetries} attempts."
     exit 1
 } else {
