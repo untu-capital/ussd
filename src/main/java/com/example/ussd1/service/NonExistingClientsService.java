@@ -37,7 +37,7 @@ public class NonExistingClientsService {
 
         //TODO fix the # problem
         if(text.isEmpty() || text.equals("#")){
-            menu.append("Good day,\n\nFor now, this service is only available for repeat clients. Please visit our nearest branch or our website (www.untucapital.co.zw) for further assistance.");
+            menu.append("Good day,\n\nFor now, this service is only available for repeat clients");
         }
 //                Apply for loan
         else if (levels.length == 1 && Objects.equals(levels[0], "1")) {
