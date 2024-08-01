@@ -1,5 +1,7 @@
 package com.example.ussd1.service;
 
+import com.example.ussd1.commons.UssdConstants;
+import com.example.ussd1.dto.ResponseMenu;
 import com.example.ussd1.entity.LoanApplication;
 import com.example.ussd1.entity.UserEntity;
 import com.example.ussd1.repository.BranchRepository;
@@ -28,31 +30,44 @@ public class NonExistingClientsService {
         return userRepository.findByPhoneNumber(phoneNumber);
     }
 
-    public StringBuilder nonExistingClients(String text, String phoneNumber){
+    public ResponseMenu nonExistingClients(String text, String phoneNumber){
         String branches = contactInfo.getAllBranches();
         String industries = industryService.getAllIndustries();
         levels = text.split("\\*");
         System.out.println(text);
         StringBuilder menu = new StringBuilder();
+        ResponseMenu responseMenu = new ResponseMenu();
 
         //TODO fix the # problem
         if(text.isEmpty() || text.equals("#")){
             menu.append("Good day,\n\nFor now, this service is only available for repeat clients");
+            responseMenu.setMessage(menu);
+            responseMenu.setStage(UssdConstants.STAGE_MENU_COMPLETE);
+            responseMenu.setTransactionType(UssdConstants.TRANSACTION_TYPE_REGISTER_USER);
         }
 //                Apply for loan
         else if (levels.length == 1 && Objects.equals(levels[0], "1")) {
             menu.append("Contact any of our branches. ").append(branches);
+            responseMenu.setMessage(menu);
+            responseMenu.setStage(UssdConstants.STAGE_MENU_COMPLETE);
+            responseMenu.setTransactionType(UssdConstants.TRANSACTION_TYPE_REGISTER_USER);
         }
         //                show branch details
         else if (levels.length==2 && Objects.equals(levels[0],"1")&& !Objects.equals(levels[1],"")) {
 //            String branch = contactInfo.getBranchName(levels[1]);
             String branchDetails = contactInfo.findBranchById(levels[1]);
             menu.append("END Branch Details").append(branchDetails);
+            responseMenu.setMessage(menu);
+            responseMenu.setStage(UssdConstants.STAGE_MENU_COMPLETE);
+            responseMenu.setTransactionType(UssdConstants.TRANSACTION_TYPE_REGISTER_USER);
         }
 
         else {
             menu.append("Invalid Option.. Try Again");
+            responseMenu.setMessage(menu);
+            responseMenu.setStage(UssdConstants.STAGE_MENU_COMPLETE);
+            responseMenu.setTransactionType(UssdConstants.TRANSACTION_TYPE_REGISTER_USER);
         }
-        return menu;
+        return responseMenu;
     }
 }
