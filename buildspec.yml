@@ -20,5 +20,6 @@ artifacts:
     - '**/target/ussd.jar'
     - 'appspec.yml'
     - 'scripts/**'
+    - 'ussd.log'
   discard-paths: yes
   base-directory: .

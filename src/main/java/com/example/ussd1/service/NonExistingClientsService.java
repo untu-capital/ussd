@@ -40,7 +40,7 @@ public class NonExistingClientsService {
 
         //TODO fix the # problem
         if(text.isEmpty() || text.equals("#")){
-            menu.append("Good day,\n\nFor now, this service is only available for repeat clients");
+            menu.append("Sorry, this service is only available to repeat clients.");
             responseMenu.setMessage(menu);
             responseMenu.setStage(UssdConstants.STAGE_MENU_COMPLETE);
             responseMenu.setTransactionType(UssdConstants.TRANSACTION_TYPE_REGISTER_USER);
