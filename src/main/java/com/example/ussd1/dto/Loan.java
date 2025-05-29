@@ -6,7 +6,7 @@ import java.time.LocalDate;
 @Data
 public class Loan {
 
-    private Long id;
+    private String id;
     private String firstName;
     private String middleName;
     private String lastName;

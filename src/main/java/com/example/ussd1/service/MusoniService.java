@@ -2,6 +2,7 @@ package com.example.ussd1.service;
 
 //import com.example.ussd1.exception.RestTemplateResponseErrorHandler;
 import com.example.ussd1.entity.Industry;
+import com.example.ussd1.util.PhoneNumberUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,69 +73,41 @@ public class MusoniService {
 
     // TODO: 31/1/2023 Get Client by phone number
     public String getClientByMobileNo(String mobileNo, String mobileNoSecondary) {
-        final String s = """
-                {
-                    "filterRulesExpression": {
-                        "condition": "OR",
-                        "rules": [
-                            {
-                                "id": "mobileNo",
-                                "field": "mobileNo",
-                                "type": "string",
-                                "input": "text",
-                                "operator": "equal",
-                                "value": %s
-                            },
-                            {
-                                "id": "mobileNoSecondary",
-                                "field": "mobileNoSecondary",
-                                "type": "string",
-                                "input": "text",
-                                "operator": "equal",
-                                "value": %s
-                            }
-                        ],
-                        "valid": true
-                    },
-                    "responseParameters": [
-                        {
-                            "ordinal": 0,
-                            "name": "id"
-                        },
-                        {
-                            "ordinal": 1,
-                            "name": "accountNo"
-                        },
-                        {
-                            "ordinal": 2,
-                            "name": "status"
-                        },
-                        {
-                            "ordinal": 3,
-                            "name": "mobileNo"
-                        }
-                    ],
-                    "sortByParameters": [
-                        {
-                            "ordinal": 0,
-                            "name": "id",
-                            "direction": "ASC"
-                        }
-                    ]
-                }
-                """.formatted(mobileNo, mobileNoSecondary);
+        String s = PhoneNumberUtil.createMusoniRequest(mobileNo, mobileNoSecondary);
         String client, clientId;
+        String modifiedMobileNo = null; // Declare the variable outside the catch block
+
         try {
             HttpEntity<String> entity = new HttpEntity<String>(s, setMusoniHeaders());
             client = restTemplate.exchange(musoniBaseURl + "datafilters/clients/queries/run-filter", HttpMethod.POST, entity, String.class).getBody();
             clientId = new JSONObject(new JSONObject(client).getJSONArray("pageItems").get(0).toString()).getBigInteger("id").toString();
             client = getClientById(clientId);
-
         } catch (JSONException e) {
-            return "{ \"errorMessage\": \"Client with mobile number %s not found\"}".formatted(mobileNo);
+            // First catch block, modify mobile number to remove the country code
+            try {
+                modifiedMobileNo = mobileNo.replaceFirst("^263", "0"); // Remove country code and replace with "0"
+                s = PhoneNumberUtil.createMusoniRequest(modifiedMobileNo, mobileNoSecondary);
+                HttpEntity<String> entity = new HttpEntity<String>(s, setMusoniHeaders());
+                client = restTemplate.exchange(musoniBaseURl + "datafilters/clients/queries/run-filter", HttpMethod.POST, entity, String.class).getBody();
+                clientId = new JSONObject(new JSONObject(client).getJSONArray("pageItems").get(0).toString()).getBigInteger("id").toString();
+                client = getClientById(clientId);
+            } catch (JSONException e1) {
+                // Second catch block, further modify mobile number to remove leading zero
+                try {
+                    String furtherModifiedMobileNo = modifiedMobileNo.replaceFirst("^0", ""); // Remove leading "0"
+                    s = PhoneNumberUtil.createMusoniRequest(furtherModifiedMobileNo, mobileNoSecondary);
+                    HttpEntity<String> entity = new HttpEntity<String>(s, setMusoniHeaders());
+                    client = restTemplate.exchange(musoniBaseURl + "datafilters/clients/queries/run-filter", HttpMethod.POST, entity, String.class).getBody();
+                    clientId = new JSONObject(new JSONObject(client).getJSONArray("pageItems").get(0).toString()).getBigInteger("id").toString();
+                    client = getClientById(clientId);
+                } catch (JSONException e2) {
+                    return "{ \"errorMessage\": \"Client with mobile number %s not found\"}".formatted(mobileNo);
+                }
+            }
         }
         return client;
     }
+
 
     public String getClientByQueryString(String queryString) {
         return restTemplate.exchange(musoniBaseURl + "clients?search=" + queryString, HttpMethod.GET, setHttpEntity(), String.class).getBody();

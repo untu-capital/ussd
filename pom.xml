@@ -15,7 +15,7 @@
     <description>ussd-1</description>
     <properties>
         <java.version>17</java.version>
-        <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <spring-cloud.version>2022.0.3</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -38,6 +38,11 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20220924</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.libphonenumber</groupId>
+            <artifactId>libphonenumber</artifactId>
+            <version>8.12.36</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

@@ -84,12 +84,15 @@ public class AppController {
 
         if (!userExist.isPresent()) {
             log.info("User not found for phone number: {}", phoneNumber);
+
             String musoniClientObject = musoniService.getClientByMobileNo(phoneNumber, phoneNumber);
             log.info("Musoni client response: {}", musoniClientObject);
 
             if (musoniClientObject.length() <= 200) {
-                response.append(nonExistingClientsService.nonExistingClients(text, phoneNumber));
-                messageResponse.setStage(UssdConstants.STAGE_MENU_PENDING);
+                ResponseMenu responseMenu =nonExistingClientsService.nonExistingClients(text, phoneNumber);
+                response.append(responseMenu.getMessage());
+                messageResponse.setStage(responseMenu.getStage());
+                messageResponse.setTransactionType(responseMenu.getTransactionType());
             } else {
                 String musoniClientId = new JSONObject(musoniClientObject).getBigInteger("id").toString();
                 String musoniFullname = new JSONObject(musoniClientObject).getString("firstname") + " " + new JSONObject(musoniClientObject).getString("lastname");
