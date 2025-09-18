@@ -17,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -45,6 +47,9 @@ public class ApplyForLoanService {
     private final SmsService smsService;
 
     private final UtgClient utgClient;
+
+    @Value("{utg.url}")
+    private String BASE_URL;
 
     // Create a logger instance
     private static final Logger logger = Logger.getLogger(ApplyForLoanService.class.getName());
@@ -148,7 +153,7 @@ public class ApplyForLoanService {
             int loanIndex = Integer.parseInt(levels[1]);
             Map<Integer, String> loanList = StringUtil.processString(musoniService.getClientAccountsList());
             log.info("CLIENT LOAN MAP:{}", loanList);
-            String link = "http://localhost:7878/api/utg/musoni/getNextInstalment/" + loanList.get(loanIndex);
+            String link = BASE_URL + "/musoni/getNextInstalment/" + loanList.get(loanIndex);
 
             try {
                 // Make the HTTP GET request to the API

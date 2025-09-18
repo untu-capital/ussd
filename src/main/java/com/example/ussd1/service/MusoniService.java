@@ -39,6 +39,8 @@ public class MusoniService {
     private String X_FINERACT_PLATFORM_TENANTID;
     @Value("${musoni.X_API_KEY}")
     private String X_API_KEY;
+    @Value("{utg.url}")
+    private String BASE_URL;
 
     public MusoniService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -149,7 +151,7 @@ public class MusoniService {
     public List<String> getClientLoans(String loanAccount) {
         clientAccounts.clear();
         String clientAccount = restTemplate.exchange(
-                "http://localhost:7878/api/utg/musoni/getActiveClientLoans/" + loanAccount,
+                BASE_URL + "/musoni/getActiveClientLoans/" + loanAccount,
                 HttpMethod.GET,
                 setHttpEntity(),
                 String.class
